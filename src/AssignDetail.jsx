@@ -11,10 +11,7 @@ function AssignDetail(props) {
   const [submitButton, changeSubmitButton] = useState("Submit");
   const [submitPopup, updateSubmitPopup] = useState(false);
   const data = useParams();
-  // const location = useLocation();
-  // const { from } = location.state;
-  // const id = from;
-  // console.log(from);
+
   const [assignmentDetails, updateAssignmentDetails] = useState([]);
 
   //API request
@@ -36,6 +33,7 @@ function AssignDetail(props) {
   const due_date = DateTime.fromISO(assignmentDetails.due_date).toLocaleString(
     DateTime.DATE_MED_WITH_WEEKDAY
   );
+  console.log("submitPopup ", submitPopup);
   return (
     <>
       <div className=" py-2 border-b border-b-slate-200">
@@ -51,10 +49,19 @@ function AssignDetail(props) {
             tag="Description"
           />
           <div className="pt-5 pb-8">
-            <Button theme="primary">{submitButton}</Button>
+            <Button theme="primary" onclick={updateSubmitPopup}>
+              {submitButton}
+            </Button>
           </div>
         </div>
-        <div>{submitPopup && <PopupCardSubmit />}</div>
+        <div>
+          {submitPopup && (
+            <PopupCardSubmit
+            // submitPopup={submitPopup}
+            // updateSubmitPopup={updateSubmitPopup}
+            />
+          )}
+        </div>
       </div>
     </>
   );

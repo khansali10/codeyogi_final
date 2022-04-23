@@ -1,16 +1,18 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { string } from "yup";
 import Button from "./Button";
-function PopupCardSubmit(props) {
+import popup from "./app";
+function PopupCardSubmit({ id }, props) {
+  // const { submitPopup, updateSubmitPopup } = props.popup;
   const [inputUrl, updateInputUrl] = useState("");
-  console.log(inputUrl);
   const changeFun = (event) => {
     updateInputUrl(event.target.value);
   };
 
   let isUrlValid;
   const [errorMsg, setErrorMsg] = useState("");
+
   const submitAssignment = () => {
     const websiteValidator = string().url("url is not valid");
     isUrlValid = websiteValidator.isValidSync(inputUrl);
@@ -18,8 +20,23 @@ function PopupCardSubmit(props) {
 
     try {
       websiteValidator.validateSync(inputUrl);
+      const data = {
+        submission_link: { inputUrl },
+      };
+      axios
+        .put(
+          `https://api.codeyogi.io/assignment/${id}/submit`,
+
+          { submission_link: { data } },
+          { withCredentials: true }
+        )
+        .then((Response) => {
+          console.log(data);
+        });
       setErrorMsg("");
     } catch (e) {
+      console.log("unsuccessful");
+
       setErrorMsg(e.message);
 
       return;
@@ -29,12 +46,7 @@ function PopupCardSubmit(props) {
     <>
       <div className="min-h-screen w-full flex justify-center items-center fixed top-0 left-0 p-5 backdrop-opacity-30 backdrop-invert">
         <div className="absolute top-0 right-0 p-5">
-          <Button
-            theme="secondary"
-            // onclick={props.updateSubmitPopup(!props.submitPopup)}
-          >
-            Back
-          </Button>
+          <button theme="secondary">Back</button>
         </div>
         <div className=" w-3/6 bg-white opacity-100 rounded-lg px-3 py-7  bg-blur text-sm text-slate-500">
           <div>

@@ -6,7 +6,9 @@ function LectureDetailsCard(props) {
   const { id, topic, start_time, end_time, recording_url, created_at } =
     props.pass;
 
-  const createdDate = DateTime.fromISO(created_at).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
+  const createdDate = DateTime.fromISO(created_at).toLocaleString(
+    DateTime.DATE_MED_WITH_WEEKDAY
+  );
 
   const start = new Date(start_time);
   const end = new Date(end_time);
@@ -24,7 +26,7 @@ function LectureDetailsCard(props) {
               <span>#{id}</span>
             </div>
             <span className="ml-2 text-stale-500 font-semibold text-slate-500">
-              ({createdAt})
+              ({createdDate})
             </span>
           </div>
           <div className="mt-2 text-sm text-slate-500">

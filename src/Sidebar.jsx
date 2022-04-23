@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { AiOutlineMenu } from "react-icons/ai";
 import WebsiteTitle from "./WebsiteTitle";
 import SidebarContentLink from "./SidebarContentLink";
 import { MdOutlineQuiz } from "react-icons/md";
@@ -9,9 +10,10 @@ import { CgProfile } from "react-icons/cg";
 import { BiLogOut } from "react-icons/bi";
 
 function Sidebar() {
+  // const [sidebar, toggleShowSideBar] = useState(false);
   return (
     <>
-      <div className="hidden md:w-60 md:p-3 bg-slate-800 md:flex md:flex-col md:justify-between md:sticky md:top-0 md:h-screen">
+      <div className="w-9 hidden md:w-60 md:p-3 bg-slate-800 md:flex md:flex-col md:justify-between md:sticky md:top-0 md:h-screen">
         <h1 className="p-2 text-3xl text-white font-extrabold uppercase">
           {<WebsiteTitle />}
         </h1>
@@ -53,6 +55,7 @@ function Sidebar() {
           </div>
         </div>
       </div>
+      )
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
 import { Link, Routes, Route } from "react-router-dom";
 import { BsCheckCircle } from "react-icons/bs";
@@ -6,15 +6,18 @@ import PopupCardSubmit from "./PopupCardSubmit";
 import { DateTime } from "luxon";
 import AssignDetail from "./AssignDetail";
 
+// import { useFormikContext, Formik, Form, Field } from "formik";
+// export const popup = { submitPopup, updateSubmitPopup };
+
 function AssignContentDetailsCard(params) {
-  //PoPUP view
+  const [submitPopup, updateSubmitPopup] = useState(false);
   const { id, title, due_date, created_at, submissions } = params.pass;
   const [showSubmissionButton, updateShowSubmissionButton] = useState(false);
   const [submitButton, changeSubmitButton] = useState("Submit");
-  const [submitPopup, updateSubmitPopup] = useState(false);
   const [isSubmitted, changeIsSubmitted] = useState(
     <span className="text-red-600 font-semibold">Not-Submitted</span>
   );
+  //PoPUP view Context
 
   const [href, updateHref] = useState("");
   useEffect(() => {
@@ -74,14 +77,7 @@ function AssignContentDetailsCard(params) {
           )}
         </div>
       </div>
-      <div>
-        {submitPopup && (
-          <PopupCardSubmit
-          // submitPopup={submitPopup}
-          // updateSubmitPopup={updateSubmitPopup}
-          />
-        )}
-      </div>
+      <div>{submitPopup && <PopupCardSubmit id={id} />}</div>
     </>
   );
 }
