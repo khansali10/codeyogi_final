@@ -20,14 +20,13 @@ function PopupCardSubmit({ id }, props) {
 
     try {
       websiteValidator.validateSync(inputUrl);
-      const data = {
-        submission_link: { inputUrl },
-      };
+      const data = inputUrl;
+
       axios
         .put(
           `https://api.codeyogi.io/assignment/${id}/submit`,
 
-          { submission_link: { data } },
+          { submissionLink: data },
           { withCredentials: true }
         )
         .then((Response) => {
