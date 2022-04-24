@@ -46,7 +46,7 @@ function AssignContentDetailsCard(params) {
   return (
     <>
       <div className="w-full px-3 py-2 bg-white rounded-md shadow-lg mb-4">
-        <Link to={`/assignment/${id}/assigndetail`}>
+        <Link to={`/assignment/${id}/assignmentdetail`}>
           <div className="flex justify-between items-center ">
             <div className="flex flex-col ">
               <div className="font-semibold">
