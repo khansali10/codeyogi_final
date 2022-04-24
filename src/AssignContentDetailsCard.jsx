@@ -21,7 +21,7 @@ function AssignContentDetailsCard(params) {
 
   const [href, updateHref] = useState("");
   useEffect(() => {
-    const href = submissions.map((item) => {
+    submissions.map((item) => {
       updateHref(item.submission_link);
     });
   }, []);
