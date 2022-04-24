@@ -33,6 +33,7 @@ function PopupCardSubmit({ id }, props) {
           console.log(data);
         });
       setErrorMsg("");
+      
     } catch (e) {
       console.log("unsuccessful");
 

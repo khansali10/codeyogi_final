@@ -34,6 +34,7 @@ function AssignContentDetailsCard(params) {
         <span className="text-green-600 font-semibold">Submitted</span>
       );
       changeSubmitButton("Re-Submit");
+      updateShowSubmissionButton(true);
     }
   }, []);
 

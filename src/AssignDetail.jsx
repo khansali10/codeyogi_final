@@ -57,8 +57,9 @@ function AssignDetail(props) {
         <div>
           {submitPopup && (
             <PopupCardSubmit
-            // submitPopup={submitPopup}
-            // updateSubmitPopup={updateSubmitPopup}
+              id={data.id}
+              // submitPopup={submitPopup}
+              // updateSubmitPopup={updateSubmitPopup}
             />
           )}
         </div>
