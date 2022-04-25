@@ -1,6 +1,18 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 
 function Profile() {
+  // let myData = {};
+  // useEffect(() => {
+  //   console.log(myData.first_name);
+  //   const data = axios.get("https://api.codeyogi.io/me", {
+  //     withCredentials: true,
+  //   });
+  //   data.then((response) => {
+  //     myData = response.data.data;
+  //     console.log(myData.id);
+  //   });
+  // }, []);
   return (
     <>
       <div className=" flex-col bg-white divide-y py-2 px-4	 rounded-md">
@@ -90,7 +102,7 @@ function Profile() {
               required
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             >
-              <option selected>Mobile without Computer</option>
+              <option>Mobile without Computer</option>
               <option>Mobile with Keyboard</option>
               <option>College Computer/Laptop</option>
               <option>Personal Computer/Laptop</option>

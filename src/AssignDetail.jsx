@@ -40,7 +40,6 @@ function AssignDetail(props) {
   const due_date = DateTime.fromISO(assignmentDetails.due_date).toLocaleString(
     DateTime.DATE_MED_WITH_WEEKDAY
   );
-  console.log("submitPopup ", submitPopup);
   return (
     <>
       <div className=" py-2 border-b border-b-slate-200">
