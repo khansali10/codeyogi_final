@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 function AssignContentList() {
   const [assignmentData, updateAssignmentData] = useState([]);
+  console.log("data");
   useEffect(() => {
     axios
       .get("https://api.codeyogi.io/batches/1/assignments", {
