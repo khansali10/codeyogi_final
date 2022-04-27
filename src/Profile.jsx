@@ -1,36 +1,47 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import React, { useEffect } from "react";
+import { DateTime } from "luxon";
 
 function Profile() {
-  // let myData = {};
-  // useEffect(() => {
-  //   console.log(myData.first_name);
-  //   const data = axios.get("https://api.codeyogi.io/me", {
-  //     withCredentials: true,
-  //   });
-  //   data.then((response) => {
-  //     myData = response.data.data;
-  //     console.log(myData.id);
-  //   });
-  // }, []);
+  const [myData, updateMyData] = useState({});
+  //geting data through API call
+  useEffect(() => {
+    const data = axios.get("https://api.codeyogi.io/me", {
+      withCredentials: true,
+    });
+    data.then((response) => {
+      updateMyData(response.data.data);
+      console.log(myData.institute);
+    });
+  }, []);
+  //submit profile form
+  const SubmitProfileForm = () => {
+    //code for submitting profile form
+  };
+
+  const lableClassName = "text-sm font-semibold text-slate-500";
+  //have not correct date yet
+  const date_of_birth = DateTime.fromISO(myData.date_of_birth).toLocaleString();
   return (
     <>
       <div className=" flex-col bg-white divide-y py-2 px-4	 rounded-md">
         <h3 className="font-semibold text-lg p-3">Personal details</h3>
-        <form>
+        <form onSubmit={SubmitProfileForm}>
           <div className="p-7 flex justify-between items-center">
-            <label className="text-sm font-semibold text-slate-500">
+            <label className={lableClassName} htmlFor="first_name">
               First Name<span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               required
+              value={myData.first_name}
+              id="first_name"
               placeholder="first name"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             ></input>
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className="text-sm font-semibold text-slate-500 ">
+            <label className={lableClassName} htmlFor="last_name">
               Last Name
               <span className="text-red-500 block">
                 (Skip only if you don't have it in official documents)
@@ -38,68 +49,79 @@ function Profile() {
             </label>
             <input
               type="text"
+              value={myData.last_name}
+              id="last_name"
               placeholder="last name"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className="text-sm font-semibold text-slate-500">
+            <label className={lableClassName} htmlFor="email">
               Email address
             </label>
             <input
               type="email"
+              value={myData.email}
+              id="email"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className="text-sm font-semibold text-slate-500">
+            <label className={lableClassName} htmlFor="institute_name">
               Institute Name<span className="text-red-500">*</span>
             </label>
             <input
               type="text"
+              value={myData.institute}
+              id="institute_name"
               required
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className="text-sm font-semibold text-slate-500">
+            <label className={lableClassName} htmlFor="year_of_pass_out">
               Year Of Passout
             </label>
             <input
               type="text"
+              value={myData.year_of_pass_out}
+              id="year_of_pass_out"
               placeholder="YYYY"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className="text-sm font-semibold text-slate-500">
+            <label className={lableClassName} htmlFor="phone_no">
               Phone Number<span className="text-red-500">*</span>
             </label>
             <input
               type="tel"
+              value={myData.phone_no}
               required
               placeholder="mobile"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className="text-sm font-semibold text-slate-500">
+            <label className={lableClassName} htmlFor="">
               Date Of Birth<span className="text-red-500">*</span>
             </label>
             <input
-              type="date"
+              type="text"
+              value={date_of_birth}
               required
               placeholder="dd/mm/yyyy"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className="text-sm font-semibold text-slate-500">
+            <label className={lableClassName} htmlFor="">
               Device you are using to do your assignments
               <span className="text-red-500">*</span>
             </label>
             <select
               required
+              value={myData.work_device}
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             >
               <option>Mobile without Computer</option>
@@ -109,21 +131,23 @@ function Profile() {
             </select>
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className="text-sm font-semibold text-slate-500">
+            <label className={lableClassName} htmlFor="">
               Institute roll no.
             </label>
             <input
               type="text"
+              value={myData.institute_roll_no}
               placeholder="roll number"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className="text-sm font-semibold text-slate-500">
+            <label className={lableClassName} htmlFor="">
               Branch
             </label>
             <input
               type="text"
+              value={myData.branch}
               placeholder="e.g. IT"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />

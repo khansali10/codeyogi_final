@@ -7,8 +7,6 @@ export const useForm = (initialValues, submitAssignment) => {
     updateFormData({ ...formData, [event.target.name]: event.target.value });
   };
   const onFormSubmit = (event) => {
-    console.log("onSubmit called");
-    console.log("formData : ", formData);
     submitAssignment(event);
   };
   return { formData, handleChangeInput, onFormSubmit };

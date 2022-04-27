@@ -14,10 +14,10 @@ function PopupCardSubmit({ id }, props) {
     console.log(formData);
     try {
       const websiteValidator = string().url("url is not valid");
-      isUrlValid = websiteValidator.isValidSync([formData.submission_url]);
+      isUrlValid = websiteValidator.isValidSync(formData.submission_url);
       console.log("isUrlValid ", isUrlValid);
 
-      websiteValidator.validateSync([formData.submission_url]);
+      websiteValidator.validateSync(formData.submission_url);
       const data = formData.submission_url;
 
       axios

@@ -2,10 +2,7 @@ import React from "react";
 function UserDetailCard(props) {
   return (
     <div className="w-56 bg-slate-200 rounded-md p-3 ">
-      <img
-        src={props.profilePicture}
-        className="w-72 h-48 hover:radius-full hover:w-32 hover:h-32  object-cover"
-      />
+      <img src={props.profilePicture} className="w-72 h-48 object-cover" />
       <div className="space-y-2 my-3">
         <div>
           <span className="text-lg font-semibold">

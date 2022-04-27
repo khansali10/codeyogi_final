@@ -25,7 +25,6 @@ function AssignContentDetailsCard(params) {
       updateHref(item.submission_link);
     });
   }, []);
-  console.log(href);
   useEffect(() => {
     if (submissions.length === 0) {
       updateShowSubmissionButton(false);
