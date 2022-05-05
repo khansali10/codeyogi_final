@@ -1,40 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { DateTime } from "luxon";
+import { useFormik } from "formik";
 
-function Profile() {
-  const [myData, updateMyData] = useState({});
-  //geting data through API call
-  useEffect(() => {
-    const data = axios.get("https://api.codeyogi.io/me", {
-      withCredentials: true,
-    });
-    data.then((response) => {
-      updateMyData(response.data.data);
-      console.log(myData.institute);
-    });
-  }, []);
+function Profile({ myData }) {
+  const initialValues = myData;
   //submit profile form
   const SubmitProfileForm = () => {
+    console.log("form submitted");
     //code for submitting profile form
   };
-
+  const { values, handleChange, handleSubmit } = useFormik({
+    initialValues,
+    SubmitProfileForm,
+  });
   const lableClassName = "text-sm font-semibold text-slate-500";
   //have not correct date yet
-  const date_of_birth = DateTime.fromISO(myData.date_of_birth).toLocaleString();
+  // console.log("children ", props.children);
+  // const date_of_birth = DateTime.fromISO(values.date_of_birth).toLocaleString();
+  // const birthDate = DateTime.fromFormat(date_of_birth, "MMMM d yyyy");
+  // console.log("birthDate ", birthDate);
   return (
     <>
       <div className=" flex-col bg-white divide-y py-2 px-4	 rounded-md">
         <h3 className="font-semibold text-lg p-3">Personal details</h3>
-        <form onSubmit={SubmitProfileForm}>
+        <form onSubmit={handleSubmit}>
           <div className="p-7 flex justify-between items-center">
             <label className={lableClassName} htmlFor="first_name">
               First Name<span className="text-red-500">*</span>
             </label>
             <input
               type="text"
+              onChange={handleChange}
+              value={values.first_name}
               required
-              value={myData.first_name}
               id="first_name"
               placeholder="first name"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
@@ -49,7 +48,8 @@ function Profile() {
             </label>
             <input
               type="text"
-              value={myData.last_name}
+              onChange={handleChange}
+              value={values.last_name}
               id="last_name"
               placeholder="last name"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
@@ -61,7 +61,8 @@ function Profile() {
             </label>
             <input
               type="email"
-              value={myData.email}
+              onChange={handleChange}
+              value={values.email}
               id="email"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
@@ -72,7 +73,8 @@ function Profile() {
             </label>
             <input
               type="text"
-              value={myData.institute}
+              onChange={handleChange}
+              value={values.institute_name}
               id="institute_name"
               required
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
@@ -84,7 +86,8 @@ function Profile() {
             </label>
             <input
               type="text"
-              value={myData.year_of_pass_out}
+              onChange={handleChange}
+              value={values.year_of_pass_out}
               id="year_of_pass_out"
               placeholder="YYYY"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
@@ -96,32 +99,36 @@ function Profile() {
             </label>
             <input
               type="tel"
-              value={myData.phone_no}
+              onChange={handleChange}
+              value={values.phone_no}
               required
               placeholder="mobile"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
-          <div className="p-7 flex justify-between items-center">
+          {/* <div className="p-7 flex justify-between items-center">
             <label className={lableClassName} htmlFor="">
               Date Of Birth<span className="text-red-500">*</span>
             </label>
             <input
-              type="text"
-              value={date_of_birth}
+              type="date"
+              onChange={handleChange}
+              value={birthDate}
               required
               placeholder="dd/mm/yyyy"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
-          </div>
+          </div> */}
           <div className="p-7 flex justify-between items-center">
-            <label className={lableClassName} htmlFor="">
+            <label className={lableClassName} htmlFor="work_device">
               Device you are using to do your assignments
               <span className="text-red-500">*</span>
             </label>
             <select
               required
-              value={myData.work_device}
+              onChange={handleChange}
+              value={values.work_device}
+              name="work_device"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             >
               <option>Mobile without Computer</option>
@@ -131,23 +138,27 @@ function Profile() {
             </select>
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className={lableClassName} htmlFor="">
+            <label className={lableClassName} htmlFor="institute_roll_no">
               Institute roll no.
             </label>
             <input
               type="text"
-              value={myData.institute_roll_no}
+              onChange={handleChange}
+              value={values.institute_roll_no}
+              name="institute_roll_no"
               placeholder="roll number"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className={lableClassName} htmlFor="">
+            <label className={lableClassName} htmlFor="branch">
               Branch
             </label>
             <input
               type="text"
+              onChange={handleChange}
               value={myData.branch}
+              name="branch"
               placeholder="e.g. IT"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />

@@ -6,37 +6,27 @@ import { DateTime } from "luxon";
 import AssignmentDetailSingleRow from "./AssignmentDetailSingleRow";
 import Button from "./Button";
 import { BiLinkExternal } from "react-icons/bi";
+import { assignmentData } from "./metaData/AssignmentData";
 
 function AssignDetail(props) {
-  const [submitButton, changeSubmitButton] = useState("Submit");
-  const [showSubmissionButton, updateShowSubmissionButton] = useState(false);
-
   const [submitPopup, updateSubmitPopup] = useState(false);
   const data = useParams();
 
   const [assignmentDetails, updateAssignmentDetails] = useState([]);
   const [href, updateHref] = useState("");
-
+  let submitButton = "submit";
   //API request
   useEffect(() => {
-    const wholeData = axios.get(
-      `https://api.codeyogi.io/assignments/${data.id}`,
-      {
-        withCredentials: true,
+    updateAssignmentDetails(assignmentData);
+    for (let i = 0; i < assignmentDetails.length; i++) {
+      if (assignmentDetails[i].submissions.length !== 0) {
+        submitButton = "Re-Submit";
       }
-    );
-    wholeData.then((response) => {
-      updateAssignmentDetails(response.data);
-      if (response.data.submissions.length !== 0) {
-        changeSubmitButton("Re-Submit");
-        updateShowSubmissionButton(true);
-        updateHref(
-          response.data.submissions.map((item) => item.submission_link)
-        );
-      }
-    });
+    }
+    updateHref(assignmentDetails.map((item) => item.submission_link));
   }, []);
-
+  console.log("assignmentData ", assignmentData);
+  console.log("assignmentDetails ", assignmentDetails);
   const due_date = DateTime.fromISO(assignmentDetails.due_date).toLocaleString(
     DateTime.DATE_MED_WITH_WEEKDAY
   );
@@ -60,14 +50,14 @@ function AssignDetail(props) {
                 {submitButton}
               </Button>
             </div>
-            {showSubmissionButton && (
+            {/* {showSubmissionButton && (
               <div className="text-center text-indigo-500 font-semibold p-2  ">
                 <a href={href} target="_blank" className="p-5">
                   <BiLinkExternal className=" w-6 h-6 inline" />
                   Show Your Submission
                 </a>
               </div>
-            )}
+            )} */}
           </div>
         </div>
         <div>

@@ -2,22 +2,17 @@ import React, { useEffect, useState } from "react";
 import LectureDetailsCard from "./LectureDetailsCard";
 import axios from "axios";
 import ListLayout from "./ListLayout";
+import { lectureData } from "./metaData/LectureData";
 
 function LectureContentList() {
-  const [lectureData, updateLectureData] = useState([]);
+  const [sessionData, updateSessionData] = useState([]);
   useEffect(() => {
-    axios
-      .get("https://api.codeyogi.io/batches/1/sessions", {
-        withCredentials: true,
-      })
-      .then((response) => {
-        updateLectureData(response.data);
-      });
+    updateSessionData(lectureData);
   }, []);
   return (
     <>
       <ListLayout>
-        {lectureData.map((item) => (
+        {sessionData.map((item) => (
           <LectureDetailsCard pass={item} key={item.id}></LectureDetailsCard>
         ))}
       </ListLayout>

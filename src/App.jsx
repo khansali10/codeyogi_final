@@ -6,9 +6,9 @@ import LecturePage from "./LecturePage";
 import AssignmentPage from "./AssignmentPage";
 import AssignDetail from "./AssignDetail";
 import UserPage from "./UserPage";
-import Profile from "./Profile";
 import Logout from "./Logout";
 import NotFound from "./NotFound";
+import ProfilePage from "./ProfilePage";
 function App() {
   return (
     <>
@@ -23,7 +23,7 @@ function App() {
             />
             <Route path="/lecture" element={<LecturePage />} />
             <Route path="/user" element={<UserPage />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/logout" element={<Logout />} />
           </Route>
           <Route path="/quiz" element={<QuizPage username="sachin" />} />
