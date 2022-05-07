@@ -39,7 +39,7 @@ function LectureDetailsCard(props) {
           </div>
         </div>
         <div className="text-center text-slate-500 font-semibold mt-2 w-full  flex items-stratch">
-          <a href={recording_url} target="_blank" className="p-4 w-full ">
+          <a href={recording_url} className="p-4 w-full ">
             <BiLinkExternal className="inline w-6 h-6 mr-2" />
             Watch/Download Recording
           </a>

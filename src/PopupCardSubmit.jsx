@@ -23,6 +23,7 @@ function PopupCardSubmit({ id }, props) {
       axios
         .put(
           `https://api.codeyogi.io/assignment/${id}/submit`,
+
           { submissionLink: data },
           { withCredentials: true }
         )
@@ -32,7 +33,9 @@ function PopupCardSubmit({ id }, props) {
       setErrorMsg("");
     } catch (e) {
       console.log("unsuccessful");
+
       setErrorMsg(e.message);
+
       return;
     }
   };
