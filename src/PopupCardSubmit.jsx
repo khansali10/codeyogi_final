@@ -4,13 +4,11 @@ import { string } from "yup";
 import Button from "./Button";
 import popup from "./app";
 import useForm from "./useForm";
+
 function PopupCardSubmit({ id }, props) {
-  const [errorMsg, setErrorMsg] = useState("");
   let isUrlValid = false;
+  const [errorMsg, setErrorMsg] = useState("");
   const submitAssignment = (event) => {
-    event.preventDefault();
-    // const { submitPopup, updateSubmitPopup } = props.popup;
-    // const [inputUrl, updateInputUrl] = useState("");
     console.log(formData);
     try {
       const websiteValidator = string().url("url is not valid");
@@ -19,7 +17,7 @@ function PopupCardSubmit({ id }, props) {
 
       websiteValidator.validateSync(formData.submission_url);
       const data = formData.submission_url;
-
+      console.log("data ", data);
       axios
         .put(
           `https://api.codeyogi.io/assignment/${id}/submit`,
@@ -62,7 +60,7 @@ function PopupCardSubmit({ id }, props) {
                   Submission Link
                 </label>
                 <input
-                  type="url"
+                  type="text"
                   name="submission_url"
                   value={formData.submission_url}
                   id="submission_url"
@@ -74,7 +72,7 @@ function PopupCardSubmit({ id }, props) {
               </form>
             </div>
             <div className="text-red-600  h-12 text-center">
-              {!isUrlValid && errorMsg}
+              {errorMsg && errorMsg}
             </div>
           </div>
         </div>

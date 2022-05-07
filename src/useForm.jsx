@@ -7,6 +7,7 @@ export const useForm = (initialValues, submitAssignment) => {
     updateFormData({ ...formData, [event.target.name]: event.target.value });
   };
   const onFormSubmit = (event) => {
+    event.preventDefault();
     submitAssignment(event);
   };
   return { formData, handleChangeInput, onFormSubmit };
