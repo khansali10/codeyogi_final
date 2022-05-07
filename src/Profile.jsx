@@ -2,18 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { DateTime } from "luxon";
 
-function Profile() {
-  const [myData, updateMyData] = useState({});
-  //geting data through API call
-  useEffect(() => {
-    const data = axios.get("https://api.codeyogi.io/me", {
-      withCredentials: true,
-    });
-    data.then((response) => {
-      updateMyData(response.data.data);
-      console.log(myData.institute);
-    });
-  }, []);
+function Profile({ myData } = props.myData.data) {
   //submit profile form
   const SubmitProfileForm = () => {
     //code for submitting profile form
@@ -21,7 +10,9 @@ function Profile() {
 
   const lableClassName = "text-sm font-semibold text-slate-500";
   //have not correct date yet
-  const date_of_birth = DateTime.fromISO(myData.date_of_birth).toLocaleString();
+  // const date_of_birth = DateTime.fromISO(
+  //   myData.date_of_birth
+  // ).toLocaleString();
   return (
     <>
       <div className=" flex-col bg-white divide-y py-2 px-4	 rounded-md">
@@ -102,7 +93,7 @@ function Profile() {
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
-          <div className="p-7 flex justify-between items-center">
+          {/* <div className="p-7 flex justify-between items-center">
             <label className={lableClassName} htmlFor="">
               Date Of Birth<span className="text-red-500">*</span>
             </label>
@@ -113,7 +104,7 @@ function Profile() {
               placeholder="dd/mm/yyyy"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
-          </div>
+          </div> */}
           <div className="p-7 flex justify-between items-center">
             <label className={lableClassName} htmlFor="">
               Device you are using to do your assignments
