@@ -1,23 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { DateTime } from "luxon";
+import { useFormik } from "formik";
 
-function Profile({ myData } = props.myData.data) {
+function Profile(props) {
+  let initialValues = props.profileData;
+
   //submit profile form
-  const SubmitProfileForm = () => {
+  const submitProfileForm = (event) => {
     //code for submitting profile form
+    console.log("submitProfileForm called ");
+    console.log("initialValuesss ", initialValues);
+    console.log("valuesss ", values);
   };
 
+  const { handleChange, handleSubmit, values } = useFormik({
+    initialValues,
+
+    onSubmit: submitProfileForm,
+  });
   const lableClassName = "text-sm font-semibold text-slate-500";
+
+  //destructuring values object which is got from useFormik
+  const {
+    first_name,
+    last_name,
+    email,
+    institute,
+    institute_roll_no,
+    phone_no,
+    date_of_birth,
+    work_device,
+    year_of_pass_out,
+    branch,
+  } = values;
   //have not correct date yet
-  // const date_of_birth = DateTime.fromISO(
-  //   myData.date_of_birth
-  // ).toLocaleString();
+  const new_birth_date = DateTime.fromISO(date_of_birth).toFormat("dd-LL-yyyy");
+
   return (
     <>
       <div className=" flex-col bg-white divide-y py-2 px-4	 rounded-md">
         <h3 className="font-semibold text-lg p-3">Personal details</h3>
-        <form onSubmit={SubmitProfileForm}>
+        <form onSubmit={handleSubmit}>
           <div className="p-7 flex justify-between items-center">
             <label className={lableClassName} htmlFor="first_name">
               First Name<span className="text-red-500">*</span>
@@ -25,8 +49,10 @@ function Profile({ myData } = props.myData.data) {
             <input
               type="text"
               required
-              value={myData.first_name}
+              value={values.first_name}
+              onChange={handleChange}
               id="first_name"
+              name="first_name"
               placeholder="first name"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             ></input>
@@ -40,8 +66,10 @@ function Profile({ myData } = props.myData.data) {
             </label>
             <input
               type="text"
-              value={myData.last_name}
+              value={last_name}
+              onChange={handleChange}
               id="last_name"
+              name="last_name"
               placeholder="last name"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
@@ -52,8 +80,10 @@ function Profile({ myData } = props.myData.data) {
             </label>
             <input
               type="email"
-              value={myData.email}
+              value={email}
+              onChange={handleChange}
               id="email"
+              name="email"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
@@ -63,8 +93,10 @@ function Profile({ myData } = props.myData.data) {
             </label>
             <input
               type="text"
-              value={myData.institute}
+              value={institute.name}
+              onChange={handleChange}
               id="institute_name"
+              name="institute_name"
               required
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
@@ -75,8 +107,10 @@ function Profile({ myData } = props.myData.data) {
             </label>
             <input
               type="text"
-              value={myData.year_of_pass_out}
+              value={year_of_pass_out}
+              onChange={handleChange}
               id="year_of_pass_out"
+              name="year_of_pass_out"
               placeholder="YYYY"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
@@ -87,33 +121,42 @@ function Profile({ myData } = props.myData.data) {
             </label>
             <input
               type="tel"
-              value={myData.phone_no}
+              value={phone_no}
+              onChange={handleChange}
               required
+              id="phone_no"
+              name="phone_no"
               placeholder="mobile"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
-          {/* <div className="p-7 flex justify-between items-center">
+          <div className="p-7 flex justify-between items-center">
             <label className={lableClassName} htmlFor="">
               Date Of Birth<span className="text-red-500">*</span>
             </label>
             <input
               type="text"
-              value={date_of_birth}
+              value={new_birth_date}
+              onChange={handleChange}
+              id="date_of_birth"
+              name="date_of_birth"
               required
               placeholder="dd/mm/yyyy"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
-          </div> */}
+          </div>
           <div className="p-7 flex justify-between items-center">
-            <label className={lableClassName} htmlFor="">
+            <label className={lableClassName} htmlFor="work_device">
               Device you are using to do your assignments
               <span className="text-red-500">*</span>
             </label>
             <select
               required
-              value={myData.work_device}
-              className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
+              value={work_device}
+              onChange={handleChange}
+              id="work_device"
+              name="work_device"
+              className="w-4/6 rounded-md  p-3 border border-slate-300"
             >
               <option>Mobile without Computer</option>
               <option>Mobile with Keyboard</option>
@@ -122,23 +165,29 @@ function Profile({ myData } = props.myData.data) {
             </select>
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className={lableClassName} htmlFor="">
+            <label className={lableClassName} htmlFor="institute_roll_no">
               Institute roll no.
             </label>
             <input
               type="text"
-              value={myData.institute_roll_no}
+              value={institute_roll_no}
+              onChange={handleChange}
+              id="institute_roll_no"
+              name="institute_roll_no"
               placeholder="roll number"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
           </div>
           <div className="p-7 flex justify-between items-center">
-            <label className={lableClassName} htmlFor="">
+            <label className={lableClassName} htmlFor="branch">
               Branch
             </label>
             <input
               type="text"
-              value={myData.branch}
+              value={branch}
+              onChange={handleChange}
+              id="branch"
+              name="branch"
               placeholder="e.g. IT"
               className="w-4/6 rounded-md p-3 bg-slate-50 border border-slate-300"
             />
