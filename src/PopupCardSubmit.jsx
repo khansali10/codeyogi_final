@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import { string } from "yup";
 import Button from "./Button";
-import popup from "./app";
 import useForm from "./useForm";
 
 function PopupCardSubmit({ id }, props) {
