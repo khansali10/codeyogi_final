@@ -19,22 +19,20 @@ function AssignDetail(props) {
 
   //API request
   useEffect(() => {
-    const wholeData = axios.get(
-      `https://api.codeyogi.io/assignments/${data.id}`,
-      {
+    axios
+      .get(`https://api.codeyogi.io/assignments/${data.id}`, {
         withCredentials: true,
-      }
-    );
-    wholeData.then((response) => {
-      updateAssignmentDetails(response.data);
-      if (response.data.submissions.length !== 0) {
-        changeSubmitButton("Re-Submit");
-        updateShowSubmissionButton(true);
-        updateHref(
-          response.data.submissions.map((item) => item.submission_link)
-        );
-      }
-    });
+      })
+      .then((response) => {
+        updateAssignmentDetails(response.data);
+        if (response.data.submissions.length !== 0) {
+          changeSubmitButton("Re-Submit");
+          updateShowSubmissionButton(true);
+          updateHref(
+            response.data.submissions.map((item) => item.submission_link)
+          );
+        }
+      });
   }, []);
 
   const due_date = DateTime.fromISO(assignmentDetails.due_date).toLocaleString(

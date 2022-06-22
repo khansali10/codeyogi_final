@@ -19,10 +19,7 @@ function AssignContentList() {
     <>
       <ListLayout>
         {assignmentData.map((item) => (
-          <AssignContentDetailsCard
-            key={item.id}
-            pass={item}
-          ></AssignContentDetailsCard>
+          <AssignContentDetailsCard pass={item} key={item.id} />
         ))}
       </ListLayout>
     </>

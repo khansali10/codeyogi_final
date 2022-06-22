@@ -6,12 +6,12 @@ import popup from "./app";
 import useForm from "./useForm";
 
 function PopupCardSubmit({ id }, props) {
-  let isUrlValid = false;
+  let isUrlValid;
   const [errorMsg, setErrorMsg] = useState("");
   const submitAssignment = (event) => {
-    console.log(formData);
+    console.log("formData", formData);
     try {
-      const websiteValidator = string().url("url is not valid");
+      const websiteValidator = string().url();
       isUrlValid = websiteValidator.isValidSync(formData.submission_url);
       console.log("isUrlValid ", isUrlValid);
 

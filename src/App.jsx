@@ -23,7 +23,7 @@ function App() {
             />
             <Route path="/lecture" element={<LecturePage />} />
             <Route path="/user" element={<UserPage />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/logout" element={<Logout />} />
           </Route>
           <Route path="/quiz" element={<QuizPage username="sachin" />} />
